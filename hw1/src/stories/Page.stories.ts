@@ -22,7 +22,7 @@ type Story = StoryObj<typeof meta>;
 
 // More on interaction testing: https://storybook.js.org/docs/vue/writing-tests/interaction-testing
 export const LoggedIn: Story = {
-  play: async ({ canvasElement }: { name: string }) => {
+  play: async ({ canvasElement }: { canvasElement: HTMLElement }) => {
     const canvas = within(canvasElement);
     const loginButton = await canvas.getByRole('button', {
       name: /Log in/i
