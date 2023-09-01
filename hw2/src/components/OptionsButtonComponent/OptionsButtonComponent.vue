@@ -1,12 +1,12 @@
 <template>
-  <span>
+  <span class="options-button">
     <label>{{label}}</label>
-    <button v-for="(option, index) in options"
-            :key="index" type="button"
+    <button v-for="option in options"
+            :key="option.id" type="button"
             :class="[
               option.selected && 'selected'
             ]"
-            @click="onClick(index)">
+            @click="onClick(option.id)">
       {{ option.buttonLabel }}
     </button>
   </span>
@@ -18,19 +18,16 @@ import { computed } from 'vue';
 const props = withDefaults(
   defineProps<{
     label: string;
-    options: {buttonLabel: string, selected: boolean}[]
-    backgroundColor?: string;
+    options: {id: number, buttonLabel: string, selected: boolean}[]
   }>(),
-  { primary: true, backgroundColor: '#f65261' }
+  {  }
 );
 
-const emit = defineEmits<{
-  (e: 'click', id: number): void;
-}>();
+const emit = defineEmits<{(event: 'click', index: number): void}>();
 
 const onClick = (index) => {
-  props.options.map((option, optionIndex) => {
-    option.selected = optionIndex === index;
+  props.options.map(option => {
+    option.selected = option.id === index;
     return option;
   });
   emit('click', index);
@@ -41,6 +38,7 @@ const onClick = (index) => {
 label{
   text-transform: uppercase;
   padding: .5rem 1rem;
+  padding-left: 0;
   font-family: Arial, Helvetica, sans-serif;
 }
 button {

@@ -1,9 +1,9 @@
-import Button from './ButtonComponent.vue';
+import HeaderComponent from './HeaderComponent.vue';
 
 // More on how to set up stories at: https://storybook.js.org/docs/vue/writing-stories/introduction
 export default {
-  title: 'MovieAppComponent/Button',
-  component: Button,
+  title: 'MovieAppComponent/Header',
+  component: HeaderComponent,
   tags: ['autodocs'],
   argTypes: {
     backgroundColor: {
@@ -14,14 +14,5 @@ export default {
 
 // More on writing stories with args: https://storybook.js.org/docs/vue/writing-stories/args
 export const Primary = {
-  args: {
-    label: 'Button'
-  }
-};
-
-export const Secondary = {
-  args: {
-    primary: false,
-    label: 'Button'
-  }
+  args: {}
 };

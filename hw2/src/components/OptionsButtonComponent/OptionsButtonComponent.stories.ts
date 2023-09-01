@@ -9,20 +9,22 @@ export default {
     backgroundColor: {
       control: 'color'
     },
-    onClick: {}
+    selectionChange: { action: 'selectionChange' }
   }
 };
 
 // More on writing stories with args: https://storybook.js.org/docs/vue/writing-stories/args
-export const Primary = {
+export const OptionsButtons = {
   args: {
     label: 'Toggle button',
     options: [
       {
+        id: 0,
         buttonLabel: 'option 1',
         selected: true
       },
       {
+        id: 1,
         buttonLabel: 'option 2'
       }
     ]
