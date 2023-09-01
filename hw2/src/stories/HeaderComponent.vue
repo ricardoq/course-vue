@@ -41,7 +41,7 @@
 
 <script lang="ts" setup>
 import './header.css';
-import MyButton from './ButtonComponent.vue';
+import MyButton from './ButtonComponent-deprecated.vue';
 
 defineProps<{ user: { name: string } | null }>();
 
