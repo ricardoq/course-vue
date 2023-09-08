@@ -1,6 +1,6 @@
 <template>
   <div class="miniature-wrapper">
-    <img :src="movie.imageUrl">
+    <img v-lazyLoad="movie.imageUrl">
     <div class="miniature-footer">
       <div>
         {{movie.name}}
@@ -17,6 +17,7 @@
 import { computed } from 'vue';
 import OptionsButton from '../OptionsButtonComponent/OptionsButtonComponent.vue';
 import IMovie from '../../shared/definitions.ts';
+import vLazyLoad from '../../directives/LazyLoadDirective';
 
 const props = withDefaults(
   defineProps<{
@@ -33,6 +34,7 @@ const props = withDefaults(
   flex-flow: column;
   padding: 0 1rem ;
   width:33%;
+  padding-top: 1000%;
 }
 .miniature-wrapper img {
   height: auto;
@@ -51,5 +53,10 @@ const props = withDefaults(
   border: 1px solid white;
   border-radius: 3px;
   padding: 2px;
+}
+img.loading {
+  background-color: grey;
+  min-height: 350px;
+  min-width: 100%;
 }
 </style>
