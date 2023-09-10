@@ -12,23 +12,24 @@
 </template>
 
 <script lang="ts" setup>
-import { computed } from 'vue';
+import { watch, onUpdated, ref } from 'vue';
 import OptionsButton from '../OptionsButtonComponent/OptionsButtonComponent.vue';
 import MovieMiniature from '../MovieMiniatureComponent/MovieMiniatureComponent.vue';
 import IMovie from '../../shared/definitions.ts';
+import {useMovies} from '../../composables/useMovies';
 
-const props = withDefaults(
-  defineProps<{
-    movies: Array<IMovie>;
-  }>(),
-  { }
-);
-
+const {moviesFiltered , initializeMovies} = useMovies();
+const movies: ref<Array<IMovie>> = ref([]);
 const sortByOptions = [
   {id: 0, buttonLabel: 'Release Date', selected: true,},
   {id: 1, buttonLabel: 'Raiting'},
 ];
 
+initializeMovies();
+watch(moviesFiltered, (moviesUpd) => {
+  movies.value = moviesUpd.map(movie => movie as IMovie);
+  console.log(movies.value, moviesUpd.map(movie => movie as IMovie));
+});
 
 </script>
 <style scoped>

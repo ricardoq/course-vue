@@ -1,16 +1,18 @@
 <template>
   <span>
     <label class="header-title">Find your movie</label>
-    <SearchComponent v-model="search"></SearchComponent>
+    <SearchComponent></SearchComponent>
     <OptionsButton label="Search by"
                    :options="searchByOptions"
-                   @click="searchBy">
+                   @click="updateSearch">
           </OptionsButton>
   </span>
 </template>
 
 <script lang="ts" setup>
-import { computed } from 'vue';
+import { computed, ref, watch } from 'vue';
+import { SearchBy } from '../../shared/definitions';
+import { useSearch } from '../../composables/useSearch';
 import SearchComponent from '../SearchComponent/SearchComponent.vue';
 import OptionsButton from '../OptionsButtonComponent/OptionsButtonComponent.vue';
 
@@ -21,7 +23,7 @@ const props = withDefaults(
   }>(),
   { }
 );
-const emit = defineEmits(['searchBy']);
+const {searchByValue, searchBy} = useSearch();
 
 const search = computed({
   get() {
@@ -32,18 +34,21 @@ const search = computed({
   }
 });
 
-const searchByOptions = [
-  {id: 0, buttonLabel: 'Title', selected: true,},
-  {id: 1, buttonLabel: 'Genre'},
-];
+const searchByOptions = ref([
+  {id: 0, buttonLabel: 'Title', value: SearchBy.TITLE, selected: true,},
+  {id: 1, buttonLabel: 'Genre', value: SearchBy.GENRE},
+]);
 
-const searchBy = (value) => {
-  searchByOptions.map(option => {
-    option.selected=value === option.id;
-    return option;
-  });
-  console.log(value);
+const updateSearch = (value) => {
+  searchBy(value);
 }
+
+watch(searchByValue, (value) => {
+  searchByOptions.value = searchByOptions.value.map(option => ({
+    ...option,
+    selected: value === option.value,
+  }));
+})
 
 </script>
 <style scoped>
