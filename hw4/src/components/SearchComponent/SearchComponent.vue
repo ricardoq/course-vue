@@ -1,10 +1,10 @@
 <template>
-  <span>
+  <div class="search">
     <InputComponent placeholder="Find your movie"
                     v-model="searchValue"></InputComponent>
     <ButtonComponent label="Search" @click="updateSearch">
           </ButtonComponent>
-  </span>
+        </div>
 </template>
 
 <script lang="ts" setup>
@@ -22,7 +22,12 @@ const updateSearch = () => {
 
 </script>
 <style scoped>
+.search {
+  display: flex;
+  width: 100%;
+}
 input {
-  margin-right: 1rem;
+  margin-right: 2rem;
+  width: 100%;
 }
 </style>

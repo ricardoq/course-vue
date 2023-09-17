@@ -1,12 +1,12 @@
 <template>
-  <span>
+  <div class="banner-component">
     <label class="header-title">Find your movie</label>
     <SearchComponent></SearchComponent>
     <OptionsButton label="Search by"
                    :options="searchByOptions"
                    @click="updateSearch">
           </OptionsButton>
-  </span>
+        </div>
 </template>
 
 <script lang="ts" setup>
@@ -52,12 +52,16 @@ watch(searchByValue, (value) => {
 
 </script>
 <style scoped>
+.banner-component {
+  padding: 50px 5%;
+}
 label.header-title {
   display: block;
   color: white;
   font-family: Arial, Helvetica, sans-serif;
+  font-size: 2rem;
   text-transform: uppercase;
-  margin-bottom: .5rem;
+  margin-bottom: 2rem;
 }
 .options-button {
   display: block;
