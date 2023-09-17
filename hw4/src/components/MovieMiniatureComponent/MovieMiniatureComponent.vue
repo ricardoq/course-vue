@@ -30,8 +30,8 @@ const props = withDefaults(
   color: white;
   display: flex;
   flex-flow: column;
-  padding: 0 1rem ;
-  width:33%;
+  padding: 1.5rem 1rem;
+  width: calc(33% - 2rem);
 }
 .miniature-wrapper img {
   height: auto;

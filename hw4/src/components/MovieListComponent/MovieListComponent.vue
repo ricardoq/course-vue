@@ -27,6 +27,7 @@ watch(moviesFiltered, (moviesUpd) => {
 <style scoped>
 .movie-list {
   display: flex;
+  flex-wrap: wrap;
   padding: 15px 5%;
 }
 </style>

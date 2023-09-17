@@ -31,7 +31,7 @@ export const Primary = {
         imageUrl: 'https://place-hold.it/270x400',
         genre: 'Comedy',
         releaseYear: 1990
-      }
+      },
     ]
   }
 };
