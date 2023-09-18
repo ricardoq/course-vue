@@ -1,5 +1,5 @@
 <template>
-  <div class="miniature-wrapper">
+  <div class="miniature-wrapper" @click="selectMovie">
     <img v-lazyLoad="movie.imageUrl">
     <div class="miniature-footer">
       <div>
@@ -14,15 +14,23 @@
 </template>
 
 <script lang="ts" setup>
-import IMovie from '../../shared/definitions.ts';
-import vLazyLoad from '../../directives/LazyLoadDirective';
+import useMoviesStore from '@/stores/useMoviesStore';
+import {IMovie} from '@/shared/definitions.ts';
+import vLazyLoad from '@/directives/LazyLoadDirective';
+import store from '@/stores/pinia';
 
 const props = withDefaults(
   defineProps<{
     movie: IMovie;
   }>(),
   { }
-)
+);
+
+const moviesStore = useMoviesStore(store);
+
+const selectMovie = () => {
+  moviesStore.updateSelectedMovie(props.movie);
+}
 
 </script>
 <style scoped>

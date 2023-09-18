@@ -7,6 +7,7 @@ import { snakeToCamel } from '@/shared/utils';
 
 const moviesList: Ref<Array<IMovie>> = ref([]);
 const sortBy: Ref<string> = ref(SortBy[SortBy.RELEASE_YEAR]);
+const selectedMovie: Ref<IMovie|null> = ref(null);
 const mockFetch: () => Promise<Array<IMovie>> = () => new Promise((resolve) => {
   setTimeout(() => {
     const data = [{
@@ -42,7 +43,6 @@ const mockFetch: () => Promise<Array<IMovie>> = () => new Promise((resolve) => {
 });
 const useMoviesStore = defineStore('movies', () => {
   const searchStore = useSearchStore(store);
-  // const sortBy: Ref<SortBy> = ref(SortBy.RELEASE_YEAR);
 
   const initializeMovies = async () => {
     moviesList.value = await mockFetch();
@@ -52,33 +52,31 @@ const useMoviesStore = defineStore('movies', () => {
     sortBy.value = SortBy[sortValue];
   };
 
-  const moviesFilteredSorted = computed(() =>{
-    console.log('FilteredSort', moviesList.value.filter((movie: IMovie) => (!searchStore.search || !sortBy.value) ||
-    (movie[SearchBy[searchStore.searchBy].toLowerCase()] as string)
-      .toLowerCase().includes(searchStore.search.toLowerCase())
-    ).sort((valA: IMovie, valB: IMovie) =>{
-      console.log(valA[snakeToCamel(sortBy.value)], valB[snakeToCamel(sortBy.value)])
-      return (valA[snakeToCamel(sortBy.value)] as number) -
-      (valB[snakeToCamel(sortBy.value)] as number);}
-    ));
-    return moviesList.value.filter((movie: IMovie) => (!searchStore.search || !sortBy.value) ||
+  const updateSelectedMovie = (selectedMovieValue: IMovie) => {
+    selectedMovie.value = selectedMovieValue;
+  };
+
+  const moviesFilteredSorted = computed(() => (
+    moviesList.value.filter(
+      (movie: IMovie) => (!searchStore.search || !sortBy.value) ||
       (movie[SearchBy[searchStore.searchBy].toLowerCase()] as string)
         .toLowerCase().includes(searchStore.search.toLowerCase())
       ).sort((valA: IMovie, valB: IMovie) =>
          (valA[snakeToCamel(sortBy.value)] as number) -
         (valB[snakeToCamel(sortBy.value)] as number)
-      );
-    });
+      )));
 
   const moviesFilteredSortedCount = computed(() => moviesFilteredSorted.value.length)
 
   return {
+    selectedMovie,
     moviesList,
     sortBy,
     moviesFilteredSorted,
     moviesFilteredSortedCount,
     initializeMovies,
     updateSortBy,
+    updateSelectedMovie,
   };
 })
 
