@@ -2,7 +2,7 @@
   <div>
     <ActionBarComponent></ActionBarComponent>
     <div class="movie-list">
-      <MovieMiniature v-for="movie in movies" v-bind:key="movie.id" :movie="movie"></MovieMiniature>
+      <MovieMiniature v-for="movie in moviesStore.moviesFiltered" v-bind:key="movie.id" :movie="movie"></MovieMiniature>
     </div>
   </div>
 </template>
@@ -11,17 +11,12 @@
 import { watch, ref } from 'vue';
 import MovieMiniature from '../MovieMiniatureComponent/MovieMiniatureComponent.vue';
 import ActionBarComponent from '../ActionBarComponent/ActionBarComponent.vue';
-import IMovie from '../../shared/definitions.ts';
-import {useMovies} from '../../composables/useMovies';
+import useMoviesStore from '@/stores/useMoviesStore';
+import store from '@/stores/pinia';
 
-const {moviesFiltered , initializeMovies} = useMovies();
-const movies: ref<Array<IMovie>> = ref([]);
+const moviesStore = useMoviesStore(store);
 
-initializeMovies();
-watch(moviesFiltered, (moviesUpd) => {
-  movies.value = moviesUpd.map(movie => movie as IMovie);
-  console.log(movies.value, moviesUpd.map(movie => movie as IMovie));
-});
+moviesStore.initializeMovies();
 
 </script>
 <style scoped>

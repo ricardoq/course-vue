@@ -4,6 +4,7 @@ export interface IMovie {
   imageUrl: string;
   genre: string;
   releaseYear: number;
+  [key: string]: string|number;
 }
 
 export enum  SearchBy{

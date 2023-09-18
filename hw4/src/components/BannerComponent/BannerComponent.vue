@@ -12,9 +12,10 @@
 <script lang="ts" setup>
 import { computed, ref, watch } from 'vue';
 import { SearchBy } from '../../shared/definitions';
-import { useSearch } from '../../composables/useSearch';
+import useSearchStore from '@/stores/useSearchStore';
 import SearchComponent from '../SearchComponent/SearchComponent.vue';
 import OptionsButton from '../OptionsButtonComponent/OptionsButtonComponent.vue';
+import store from '@/stores/pinia';
 
 const props = withDefaults(
   defineProps<{
@@ -23,7 +24,7 @@ const props = withDefaults(
   }>(),
   { }
 );
-const {searchByValue, searchBy} = useSearch();
+const {updateSearchBy, searchBy} = useSearchStore(store);
 
 const search = computed({
   get() {
@@ -40,10 +41,10 @@ const searchByOptions = ref([
 ]);
 
 const updateSearch = (value) => {
-  searchBy(value);
+  updateSearchBy(value);
 }
 
-watch(searchByValue, (value) => {
+watch(searchBy, (value) => {
   searchByOptions.value = searchByOptions.value.map(option => ({
     ...option,
     selected: value === option.value,

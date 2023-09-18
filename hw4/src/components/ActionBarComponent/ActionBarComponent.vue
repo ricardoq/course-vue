@@ -1,6 +1,6 @@
 <template>
   <div class="list-header">
-    <label>{{movies.length}} movies found</label>
+    <label>{{moviesStore.moviesFilteredCount}} movies found</label>
     <OptionsButton label="Sort by"
                   :options="sortByOptions"></OptionsButton>
   </div>
@@ -10,19 +10,14 @@
 import { watch, ref } from 'vue';
 import OptionsButton from '../OptionsButtonComponent/OptionsButtonComponent.vue';
 import IMovie from '../../shared/definitions.ts';
-import {useMovies} from '../../composables/useMovies';
+import useMoviesStore from '@/stores/useMoviesStore';
+import store from '@/stores/pinia';
 
-const {moviesFiltered , initializeMovies} = useMovies();
-const movies: ref<Array<IMovie>> = ref([]);
+const moviesStore = useMoviesStore(store);
 const sortByOptions = [
   {id: 0, buttonLabel: 'Release Date', selected: true,},
   {id: 1, buttonLabel: 'Raiting'},
 ];
-
-watch(moviesFiltered, (moviesUpd) => {
-  movies.value = moviesUpd.map(movie => movie as IMovie);
-  console.log(movies.value, moviesUpd.map(movie => movie as IMovie));
-});
 
 </script>
 <style scoped>

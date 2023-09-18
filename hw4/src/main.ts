@@ -1,12 +1,9 @@
 import { createApp } from 'vue';
 import App from './App.vue';
 import vLazyLoad from './directives/LazyLoadDirective';
-import { createPinia } from 'pinia';
+import store from '@/stores/pinia';
 
-const pinia = createPinia();
-
-const app = createApp(App);
-app.use(pinia)
+const app = createApp(App).use(store);
 
 app.mount('#app');
 
