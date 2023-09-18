@@ -1,23 +1,27 @@
 <template>
   <div class="list-header">
-    <label>{{moviesStore.moviesFilteredCount}} movies found</label>
+    <label>{{moviesStore.moviesFilteredSortedCount}} movies found</label>
     <OptionsButton label="Sort by"
-                  :options="sortByOptions"></OptionsButton>
+                  :options="sortByOptions"
+                  @click="updateSortBy"></OptionsButton>
   </div>
 </template>
 
 <script lang="ts" setup>
-import { watch, ref } from 'vue';
+import { ref } from 'vue';
 import OptionsButton from '../OptionsButtonComponent/OptionsButtonComponent.vue';
-import IMovie from '../../shared/definitions.ts';
+import {IMovie} from '../../shared/definitions';
 import useMoviesStore from '@/stores/useMoviesStore';
 import store from '@/stores/pinia';
 
 const moviesStore = useMoviesStore(store);
-const sortByOptions = [
+const sortByOptions = ref([
   {id: 0, buttonLabel: 'Release Date', selected: true,},
   {id: 1, buttonLabel: 'Raiting'},
-];
+]);
+const updateSortBy = (value) => {
+  moviesStore.updateSortBy(value);
+};
 
 </script>
 <style scoped>

@@ -2,13 +2,12 @@
   <div>
     <ActionBarComponent></ActionBarComponent>
     <div class="movie-list">
-      <MovieMiniature v-for="movie in moviesStore.moviesFiltered" v-bind:key="movie.id" :movie="movie"></MovieMiniature>
+      <MovieMiniature v-for="movie in moviesStore.moviesFilteredSorted" v-bind:key="movie.id" :movie="movie"></MovieMiniature>
     </div>
   </div>
 </template>
 
 <script lang="ts" setup>
-import { watch, ref } from 'vue';
 import MovieMiniature from '../MovieMiniatureComponent/MovieMiniatureComponent.vue';
 import ActionBarComponent from '../ActionBarComponent/ActionBarComponent.vue';
 import useMoviesStore from '@/stores/useMoviesStore';
