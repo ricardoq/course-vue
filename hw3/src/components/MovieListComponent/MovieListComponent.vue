@@ -18,7 +18,7 @@ import MovieMiniature from '../MovieMiniatureComponent/MovieMiniatureComponent.v
 import IMovie from '../../shared/definitions.ts';
 import {useMovies} from '../../composables/useMovies';
 
-const {moviesFiltered , initializeMovies} = useMovies();
+const {moviesFilteredSorted , initializeMovies} = useMovies();
 const movies: ref<Array<IMovie>> = ref([]);
 const sortByOptions = [
   {id: 0, buttonLabel: 'Release Date', selected: true,},
@@ -26,7 +26,7 @@ const sortByOptions = [
 ];
 
 initializeMovies();
-watch(moviesFiltered, (moviesUpd) => {
+watch(moviesFilteredSorted, (moviesUpd) => {
   movies.value = moviesUpd.map(movie => movie as IMovie);
   console.log(movies.value, moviesUpd.map(movie => movie as IMovie));
 });

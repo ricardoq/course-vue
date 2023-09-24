@@ -37,7 +37,7 @@ export function useMovies() {
     moviesList.value = await mockFetch();
   };
 
-  const moviesFiltered = computed(() =>
+  const moviesFilteredSorted = computed(() =>
     moviesList.value.filter((movie: IMovie) =>
       !searchValue.value ||
       movie[SearchBy[searchByVal.value].toLowerCase()]
@@ -48,5 +48,5 @@ export function useMovies() {
   });
 
 
-  return { moviesFiltered ,initializeMovies};
+  return { moviesFilteredSorted ,initializeMovies};
 }
