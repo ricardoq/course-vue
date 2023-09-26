@@ -10,7 +10,7 @@
 </template>
 
 <script lang="ts" setup>
-import { computed, ref, watch } from 'vue';
+import { ref, watch } from 'vue';
 import { SearchBy } from '../../shared/definitions';
 import useSearchStore from '@/stores/useSearchStore';
 import SearchComponent from '../SearchComponent/SearchComponent.vue';
@@ -25,16 +25,6 @@ const props = withDefaults(
   { }
 );
 const {updateSearchBy, searchBy} = useSearchStore(store);
-
-const search = computed({
-  get() {
-    return props.modelSearch;
-  },
-  set(value) {
-    console.log(value);
-  }
-});
-
 const searchByOptions = ref([
   {id: 0, buttonLabel: 'Title', value: SearchBy.TITLE, selected: true,},
   {id: 1, buttonLabel: 'Genre', value: SearchBy.GENRE},
