@@ -2,16 +2,16 @@ export interface IMovie {
   id: string;
   title: string;
   imageUrl: string;
-  genre: string;
+  genres: string[];
   releaseYear: number;
   raiting: number;
-  description: number;
+  description: string;
   [key: string]: string|number;
 }
 
 export enum  SearchBy{
   TITLE,
-  GENRE
+  GENRES,
 };
 
 export enum  SortBy{

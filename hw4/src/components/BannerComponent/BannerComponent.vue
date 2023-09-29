@@ -37,7 +37,7 @@ const search = computed({
 
 const searchByOptions = ref([
   {id: 0, buttonLabel: 'Title', value: SearchBy.TITLE, selected: true,},
-  {id: 1, buttonLabel: 'Genre', value: SearchBy.GENRE},
+  {id: 1, buttonLabel: 'Genre', value: SearchBy.GENRES},
 ]);
 
 const updateSearch = (value) => {

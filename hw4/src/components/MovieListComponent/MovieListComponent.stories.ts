@@ -15,21 +15,21 @@ export const Primary = {
         id: 0,
         name: 'Pelicula 1',
         imageUrl: 'https://place-hold.it/270x400',
-        genre: 'Action & adventure',
+        genres: ['Action & adventure'],
         releaseYear: 2000
       },
       {
         id: 1,
         name: 'Pelicula 2',
         imageUrl: 'https://place-hold.it/270x400',
-        genre: 'Drama',
+        genres: ['Drama'],
         releaseYear: 2010
       },
       {
         id: 2,
         name: 'Pelicula 3',
         imageUrl: 'https://place-hold.it/270x400',
-        genre: 'Comedy',
+        genres: ['Comedy'],
         releaseYear: 1990
       }
     ]
