@@ -4,7 +4,7 @@
     <div class="miniature-footer">
       <div>
         {{movie.title}}
-        <span class="genre">{{movie.genre}}</span>
+        <span class="genre">{{movie.genres[0]}}</span>
       </div>
       <div>
         <span class="release-year">{{movie.releaseYear}}</span>
