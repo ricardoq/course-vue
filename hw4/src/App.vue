@@ -8,7 +8,6 @@
 </template>
 
 <script>
-import HomePage from './pages/HomePage/HomePage.vue';
 import Logo from './components/LogoComponent/LogoComponent.vue';
 
 export default {
