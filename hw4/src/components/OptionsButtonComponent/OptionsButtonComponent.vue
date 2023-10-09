@@ -13,8 +13,6 @@
 </template>
 
 <script lang="ts" setup>
-import { computed } from 'vue';
-
 const props = withDefaults(
   defineProps<{
     label: string;

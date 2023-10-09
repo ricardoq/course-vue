@@ -10,7 +10,6 @@
 <script lang="ts" setup>
 import { ref } from 'vue';
 import OptionsButton from '../OptionsButtonComponent/OptionsButtonComponent.vue';
-import {IMovie} from '../../shared/definitions';
 import useMoviesStore from '@/stores/useMoviesStore';
 import store from '@/stores/pinia';
 
