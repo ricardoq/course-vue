@@ -14,13 +14,12 @@ import ButtonComponent from '../ButtonComponent/ButtonComponent.vue';
 import useSearchStore from '@/stores/useSearchStore';
 import store from '@/stores/pinia';
 
-const searchValue = ref('');
 const searchStore = useSearchStore(store);
+const searchValue = ref('');
 
 const updateSearchTrigger = () => {
   searchStore.updateSearch(searchValue.value);
 }
-
 </script>
 <style scoped>
 .search {

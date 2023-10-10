@@ -5,27 +5,39 @@ import { defineStore } from 'pinia';
 import store from '@/stores/pinia';
 import { snakeToCamel } from '@/shared/utils';
 import MovieApi from '@/api/api';
+import { useRoute } from 'vue-router'
 
 const moviesList: Ref<Array<IMovie>> = ref([]);
 const sortBy: Ref<string> = ref(SortBy[SortBy.RELEASE_YEAR]);
-const selectedMovie: Ref<IMovie|null> = ref(null);
 
 const useMoviesStore = defineStore('movies', () => {
   const searchStore = useSearchStore(store);
   const movieApi = new MovieApi;
+  const route = useRoute();
 
   const initializeMovies = async () => {
-    console.log(await movieApi.fetchMovies());
-    moviesList.value = await movieApi.fetchMovies();
+    if(!moviesList.value.length) {
+      moviesList.value = await movieApi.fetchMovies();
+    }
   };
 
   const updateSortBy = (sortValue = SortBy.RELEASE_YEAR) => {
     sortBy.value = SortBy[sortValue];
   };
 
-  const updateSelectedMovie = (selectedMovieValue: IMovie) => {
-    selectedMovie.value = selectedMovieValue;
-  };
+  const selectedMovie = computed(() => {
+    const {id = ''} = route.params;
+    console.log('idExist', !id, id);
+    if (!id) {
+      return false;
+    }
+    console.log(moviesList.value.find((movie) => movie.id === id));
+    return moviesList.value.find((movie) => movie.id === id);
+  },{
+    onTrigger(e) {
+      console.log('onTrigger', e);
+    }
+  });
 
   const moviesFilteredSorted = computed(() => {
     return moviesList.value.filter(
@@ -56,7 +68,6 @@ const useMoviesStore = defineStore('movies', () => {
     moviesFilteredSortedCount,
     initializeMovies,
     updateSortBy,
-    updateSelectedMovie,
   };
 })
 
