@@ -1,5 +1,5 @@
 <template>
-  <div class="miniature-wrapper" @click="selectMovie">
+  <router-link class="miniature-wrapper" :to="`/movie/${movie.id}`">
     <img v-lazyLoad="movie.imageUrl">
     <div class="miniature-footer">
       <div>
@@ -10,14 +10,12 @@
         <span class="release-year">{{movie.releaseYear}}</span>
       </div>
     </div>
-  </div>
+  </router-link>
 </template>
 
 <script lang="ts" setup>
-import useMoviesStore from '@/stores/useMoviesStore';
 import {IMovie} from '@/shared/definitions.ts';
 import vLazyLoad from '@/directives/LazyLoadDirective';
-import store from '@/stores/pinia';
 
 const props = withDefaults(
   defineProps<{
@@ -25,13 +23,6 @@ const props = withDefaults(
   }>(),
   { }
 );
-
-const moviesStore = useMoviesStore(store);
-
-const selectMovie = () => {
-  moviesStore.updateSelectedMovie(props.movie);
-}
-
 </script>
 <style scoped>
 .miniature-wrapper {
@@ -39,6 +30,7 @@ const selectMovie = () => {
   display: flex;
   flex-flow: column;
   padding: 1.5rem 1rem;
+  text-decoration: none;
   width: calc(33% - 2rem);
 }
 .miniature-wrapper img {

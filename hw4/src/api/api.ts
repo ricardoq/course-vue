@@ -8,13 +8,15 @@ export default class MovieApi {
     return request(`${this.BASE_URL}/movies`).then(rawMovies => {
       return rawMovies.map((rawMovie: {[key: string]: string|number;}) => {
         return {
-          id: rawMovie.id,
+          id: rawMovie.id.toString(),
           title: rawMovie.title,
           imageUrl: rawMovie.posterurl,
           genres: rawMovie.genres,
           releaseYear: rawMovie.year,
           raiting: rawMovie.imdbRating,
           description: rawMovie.storyline,
+          duration: rawMovie.duration.toString()
+                      .substring(2, rawMovie.duration.toString().length - 1),
         };
       });
     });
